@@ -184,6 +184,13 @@ size_t strmax(char **arr) {
 
 typedef int (*compar)(const void *, const void *);
 
+void usage(char *program_name) {
+    const char *fmt = \
+        "usage: %s [-n] {user_a} {user_b}\n"
+        "   -n      sort groups by name\n";
+    fprintf(stderr, fmt, program_name);
+}
+
 int main(int argc, char *argv[]) {
     struct User *user_a, *user_b;
     int rec;
@@ -193,7 +200,7 @@ int main(int argc, char *argv[]) {
     compar fn_sort = &group_sort_id;
 
     if (argc < 3) {
-        fprintf(stderr, "usage: %s [-n] {user_a} {user_b}\n", argv[0]);
+        usage(argv[0]);
         exit(EXIT_FAILURE);
     }
 
